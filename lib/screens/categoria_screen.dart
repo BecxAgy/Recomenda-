@@ -5,12 +5,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import '../models/categoria.dart';
 
 class CategoriaScreen extends StatelessWidget {
-  final Categoria categoria;
-
-  const CategoriaScreen(this.categoria);
-
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text(categoria.title));
+    final categoria = ModalRoute.of(context)?.settings.arguments as Categoria;
+
+    return Scaffold(body: Container(child: Text(categoria.title)));
   }
 }

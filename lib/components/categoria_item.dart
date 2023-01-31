@@ -9,14 +9,12 @@ class CategoryItem extends StatelessWidget {
   const CategoryItem(this.categoria);
 
   void _selectScreen(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-      return CategoriaScreen(categoria);
-    }));
+    Navigator.of(context).pushNamed('/categoria', arguments: categoria);
   }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () => _selectScreen(context),
       child: Padding(
         padding: const EdgeInsets.only(left: 8.0),
