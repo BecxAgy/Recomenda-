@@ -1,16 +1,9 @@
-# desingprojeto
+# Recomendaçoes (Em construção)
 
-A new Flutter project.
+Aplicação desenvolvida em flutter para contribuir com a manutenção da qualidade de vida a partir de recomendações que se baseiam no estilo de vida do usuário.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Funcionalidades
+- Chatbot para conversa entre a IA e o usuário
+- Autenticação e integração com banco de dados
+- Feed de recomendação baseado em parâmetros(categorias)
+- ...
