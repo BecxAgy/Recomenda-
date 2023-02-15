@@ -39,6 +39,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.3
+  flutter_svg: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -64,12 +65,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/icons/in-love.png
-    - assets/icons/bake.png
-    - assets/icons/money-bag.png
-    - assets/icons/movies.png
-    - assets/icons/open-book.png
-    - assets/icons/weights.png
+    - assets/icons/
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
