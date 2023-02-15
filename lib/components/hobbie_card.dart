@@ -25,22 +25,19 @@ Widget HobbieCard(String name, String svgSrc, bool isSelected, int index) {
       ),
       child: Container(
         color: Colors.transparent,
-        child: GestureDetector(
-          onTap: () {},
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: <Widget>[
-                Spacer(),
-                SvgPicture.asset(svgSrc),
-                Spacer(),
-                Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15),
-                )
-              ],
-            ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: <Widget>[
+              Spacer(),
+              SvgPicture.asset(svgSrc),
+              Spacer(),
+              Text(
+                name,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 15),
+              )
+            ],
           ),
         ),
       ),

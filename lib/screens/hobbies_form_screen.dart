@@ -6,10 +6,17 @@ import '../components/hobbie_card.dart';
 import '../components/search_bar.dart';
 import '../models/hobbies_list.dart';
 
-class HobbieFormScreen extends StatelessWidget {
+class HobbieFormScreen extends StatefulWidget {
+  @override
+  State<HobbieFormScreen> createState() => _HobbieFormScreenState();
+}
+
+class _HobbieFormScreenState extends State<HobbieFormScreen> {
   @override
   Widget build(BuildContext context) {
     final hobbies = Provider.of<HobbiesList>(context, listen: false).hobbies;
+    final selectedHobbies =
+        Provider.of<HobbiesList>(context, listen: false).selectedHobbies;
     var size = MediaQuery.of(context)
         .size; //this gonna give us total height and with of our device
     return Scaffold(
@@ -44,14 +51,52 @@ class HobbieFormScreen extends StatelessWidget {
                         itemCount: hobbies.length,
                         itemBuilder: (BuildContext context, int index) {
                           // return item
-                          return HobbieCard(
-                            hobbies[index].name,
-                            hobbies[index].svgSrc,
-                            hobbies[index].isSelected,
-                            index,
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                hobbies[index].isSelected =
+                                    !hobbies[index].isSelected;
+                                if (hobbies[index].isSelected == true) {
+                                  selectedHobbies.add(hobbies[index]);
+                                } else if (hobbies[index].isSelected == false) {
+                                  selectedHobbies.removeWhere((element) =>
+                                      element.name == hobbies[index].name);
+                                }
+                              });
+
+                              print(selectedHobbies);
+                            },
+                            child: HobbieCard(
+                              hobbies[index].name,
+                              hobbies[index].svgSrc,
+                              hobbies[index].isSelected,
+                              index,
+                            ),
                           );
                         }),
                   ),
+                  selectedHobbies.length > 0
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 25,
+                            vertical: 10,
+                          ),
+                          child: Center(
+                            child: FloatingActionButton(
+                              backgroundColor:
+                                  Color.fromARGB(255, 166, 13, 172),
+                              child: Icon(Icons.check),
+                              onPressed: () {
+                                Provider.of<HobbiesList>(context, listen: false)
+                                    .addHobbies()
+                                    .then((value) {
+                                  Navigator.of(context).pop();
+                                });
+                              },
+                            ),
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
