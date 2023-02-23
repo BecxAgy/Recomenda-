@@ -1,9 +1,11 @@
+import 'package:desingprojeto/screens/auth_screen.dart';
 import 'package:desingprojeto/screens/categoria_screen.dart';
 import 'package:desingprojeto/screens/hobbies_form_screen.dart';
 import 'package:desingprojeto/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'models/auth.dart';
 import 'models/financas_list.dart';
 import 'models/hobbies_list.dart';
 import 'utils/app_routes.dart';
@@ -21,7 +23,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => FinancasList()),
-        ChangeNotifierProvider(create: (_) => HobbiesList())
+        ChangeNotifierProvider(create: (_) => HobbiesList()),
+        ChangeNotifierProvider(create: (_) => Auth())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -29,6 +32,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.HOME: (context) => HomeScreen(),
           AppRoutes.Categoria: (context) => CategoriaScreen(),
           AppRoutes.HOBBIE_FORM: (context) => HobbieFormScreen(),
+          AppRoutes.AUTH: (context) => AuthScreen()
         },
       ),
     );

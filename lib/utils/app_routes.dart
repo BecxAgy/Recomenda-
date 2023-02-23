@@ -3,4 +3,5 @@ class AppRoutes {
   static const Categoria = '/categoria';
   static const HOBBIE_FORM = '/hobbie-form';
   static const FINANCAS_FORM = '/financas-form';
+  static const AUTH = '/auth';
 }
