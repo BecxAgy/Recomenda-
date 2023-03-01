@@ -2,6 +2,7 @@ import 'package:desingprojeto/screens/auth_screen.dart';
 import 'package:desingprojeto/screens/categoria_screen.dart';
 import 'package:desingprojeto/screens/hobbies_form_screen.dart';
 import 'package:desingprojeto/screens/home_screen.dart';
+import 'package:desingprojeto/screens/settings_screen.dart';
 import 'package:desingprojeto/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,9 +32,10 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         routes: {
           AppRoutes.HOME: (context) => HomeScreen(),
+          AppRoutes.AUTH: (context) => AuthScreen(),
+          AppRoutes.SETTINGS: (context) => SettingsScreen(),
           AppRoutes.Categoria: (context) => CategoriaScreen(),
           AppRoutes.HOBBIE_FORM: (context) => HobbieFormScreen(),
-          AppRoutes.AUTH: (context) => AuthScreen(),
           AppRoutes.WELCOME: (context) => WelcomeScreen()
         },
       ),

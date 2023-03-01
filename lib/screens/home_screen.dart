@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:desingprojeto/components/categoria_item.dart';
 import 'package:desingprojeto/components/emoticon_face.dart';
 import 'package:desingprojeto/data/categoria_data.dart';
+import 'package:desingprojeto/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -25,7 +26,10 @@ class _MyWidgetState extends State<HomeScreen> {
             items: [
               Icon(Icons.favorite),
               Icon(Icons.home),
-              Icon(Icons.settings)
+              IconButton(
+                  icon: Icon(Icons.settings),
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(AppRoutes.SETTINGS))
             ],
             backgroundColor: Color.fromARGB(255, 224, 224, 224),
             color: Color.fromARGB(255, 225, 190, 231)),

@@ -1,5 +1,6 @@
 class AppRoutes {
   static const HOME = '/';
+  static const SETTINGS = '/settings';
   static const Categoria = '/categoria';
   static const HOBBIE_FORM = '/hobbie-form';
   static const FINANCAS_FORM = '/financas-form';
