@@ -1,4 +1,5 @@
 import 'package:desingprojeto/exceptions/auth_exceptions.dart';
+import 'package:desingprojeto/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -67,10 +68,12 @@ class _AuthFormState extends State<AuthForm> {
     try {
       if (_isLogin()) {
         // Login
-        await auth.login(
-          _authData['email']!,
-          _authData['password']!,
-        );
+        await auth
+            .login(
+              _authData['email']!,
+              _authData['password']!,
+            )
+            .then((value) => Navigator.of(context).pushNamed(AppRoutes.HOME));
       } else {
         // Registrar
         await auth.signup(

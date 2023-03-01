@@ -31,7 +31,7 @@ class Body extends StatelessWidget {
           decoration: BoxDecoration(
               color: Colors.purple, borderRadius: BorderRadius.circular(30)),
           child: TextButton(
-              onPressed: () => Navigator.of(context).pushNamed(AppRoutes.AUTH),
+              onPressed: () => Navigator.of(context).pushNamed(AppRoutes.HOME),
               child: Text(
                 "Começar",
                 style: TextStyle(color: Colors.white),
