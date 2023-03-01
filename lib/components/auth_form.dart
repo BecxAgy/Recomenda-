@@ -1,3 +1,4 @@
+import 'package:desingprojeto/exceptions/auth_exceptions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -37,6 +38,22 @@ class _AuthFormState extends State<AuthForm> {
     }
   }
 
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Ocorreo um Erro'),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Fechar'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
 
@@ -47,14 +64,27 @@ class _AuthFormState extends State<AuthForm> {
     _formKey.currentState?.save();
     Auth auth = Provider.of(context, listen: false);
 
-    if (_isLogin()) {
-    } else {
-      await auth.singUp(_authData['email']!, _authData['password']!);
+    try {
+      if (_isLogin()) {
+        // Login
+        await auth.login(
+          _authData['email']!,
+          _authData['password']!,
+        );
+      } else {
+        // Registrar
+        await auth.signup(
+          _authData['email']!,
+          _authData['password']!,
+        );
+      }
+    } on AuthException catch (error) {
+      _showErrorDialog(error.toString());
+    } catch (error) {
+      _showErrorDialog('Ocorreu um erro inesperado!');
     }
 
-    setState(() {
-      _isLoading = false;
-    });
+    setState(() => _isLoading = false);
   }
 
   @override
@@ -64,7 +94,7 @@ class _AuthFormState extends State<AuthForm> {
         elevation: 8,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           height: _isLogin() ? 310 : 400,
           width: device.width * 0.75,
           child: Form(
@@ -72,12 +102,12 @@ class _AuthFormState extends State<AuthForm> {
             child: Column(
               children: [
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'E-mail'),
+                  decoration: const InputDecoration(labelText: 'E-mail'),
                   keyboardType: TextInputType.emailAddress,
                   onSaved: (email) => _authData['email'] = email ?? '',
                 ),
                 TextFormField(
-                    decoration: InputDecoration(labelText: 'Senha'),
+                    decoration: const InputDecoration(labelText: 'Senha'),
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     controller: _passwordController,
@@ -96,7 +126,8 @@ class _AuthFormState extends State<AuthForm> {
                 //Só aparece se for cadastro
                 if (_isSingUp())
                   TextFormField(
-                      decoration: InputDecoration(labelText: 'Confirmar Senha'),
+                      decoration:
+                          const InputDecoration(labelText: 'Confirmar Senha'),
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       validator: (_password) {
@@ -109,17 +140,17 @@ class _AuthFormState extends State<AuthForm> {
                         return null;
                       }),
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
 
                 _isLoading
-                    ? CircularProgressIndicator()
+                    ? const CircularProgressIndicator()
                     : ElevatedButton(
                         onPressed: _submit,
                         child: Text(_isLogin() ? "Entrar" : "Cadastrar")),
 
-                Spacer(),
+                const Spacer(),
                 TextButton(
                     onPressed: switchAuthMode,
                     child: Text(_isLogin()
