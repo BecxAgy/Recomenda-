@@ -45,6 +45,7 @@ class Auth with ChangeNotifier {
     final body = jsonDecode(response.body);
 
     if (body['error'] != null) {
+      print(body);
       throw AuthException(body['error']['message']);
     } else {
       _token = body['idToken'];
@@ -58,8 +59,6 @@ class Auth with ChangeNotifier {
       );
       notifyListeners();
     }
-
-    print(body);
   }
 
   Future<void> signup(String email, String password) async {

@@ -68,12 +68,10 @@ class _AuthFormState extends State<AuthForm> {
     try {
       if (_isLogin()) {
         // Login
-        await auth
-            .login(
-              _authData['email']!,
-              _authData['password']!,
-            )
-            .then((value) => Navigator.of(context).pushNamed(AppRoutes.HOME));
+        await auth.login(
+          _authData['email']!,
+          _authData['password']!,
+        );
       } else {
         // Registrar
         await auth.signup(
@@ -83,8 +81,6 @@ class _AuthFormState extends State<AuthForm> {
       }
     } on AuthException catch (error) {
       _showErrorDialog(error.toString());
-    } catch (error) {
-      _showErrorDialog('Ocorreu um erro inesperado!');
     }
 
     setState(() => _isLoading = false);

@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'models/auth.dart';
 import 'models/financas_list.dart';
 import 'models/hobbies_list.dart';
+import 'screens/login_or_home.dart';
 import 'utils/app_routes.dart';
 
 void main() {
@@ -31,8 +32,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         routes: {
-          AppRoutes.HOME: (context) => HomeScreen(),
-          AppRoutes.AUTH: (context) => AuthScreen(),
+          AppRoutes.HOME: (context) => LoginOrHomeScreen(),
           AppRoutes.SETTINGS: (context) => SettingsScreen(),
           AppRoutes.Categoria: (context) => CategoriaScreen(),
           AppRoutes.HOBBIE_FORM: (context) => HobbieFormScreen(),
