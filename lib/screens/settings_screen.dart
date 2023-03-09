@@ -1,4 +1,5 @@
 import 'package:desingprojeto/models/auth.dart';
+import 'package:desingprojeto/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -57,10 +58,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget colorTiles() {
     return Column(
       children: [
-        colorTile(Icons.person_outline, Colors.deepPurple, "Personal data"),
-        colorTile(Icons.settings_outlined, Colors.blue, "Settings"),
-        colorTile(Icons.credit_card, Colors.pink, "Payment"),
-        colorTile(Icons.favorite_border, Colors.orange, "Personal data"),
+        colorTile(
+            "User", Icons.person_outline, Colors.deepPurple, "Dados Pessoais"),
+        colorTile("Configuracoes", Icons.settings_outlined, Colors.blue,
+            "Configurações"),
+        colorTile("Salvos", Icons.bookmark, Colors.blue, "Salvos"),
+        colorTile("Ajuda", Icons.help, Colors.deepPurple, "Ajuda")
       ],
     );
   }
@@ -69,9 +72,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // Color color = Colors.blueGrey.shade800; not satisfied, so let us pick it
     return Column(
       children: [
-        bwTile(Icons.info_outline, "FAQs"),
-        bwTile(Icons.border_color_outlined, "Handbook"),
-        bwTile(Icons.textsms_outlined, "Community"),
+        bwTile("Logout", Icons.logout, "Sair"),
       ],
     );
   }
@@ -79,11 +80,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
 //only for ease of understanding, other wise you can use colorTile Directly,
 // in my preference, i split the widgets into as many chunks as possible
 
-  Widget bwTile(IconData icon, String text) {
-    return colorTile(icon, Colors.black, text, blackAndWhite: true);
+  Widget bwTile(String nameRoute, IconData icon, String text) {
+    return colorTile(nameRoute, icon, Colors.black, text, blackAndWhite: true);
   }
 
-  Widget colorTile(IconData icon, Color color, String text,
+  Widget colorTile(String nameRoute, IconData icon, Color color, String text,
       {bool blackAndWhite = false}) {
     Color pickedColor = Color(0xfff3f4fe);
     return ListTile(
@@ -102,8 +103,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           fontWeight: FontWeight.w500,
         ),
       ),
-      trailing: Icon(Icons.arrow_forward_ios, color: Colors.black, size: 20),
-      onTap: () {},
+      trailing: Icon(Icons.arrow_forward_ios, color: Colors.black, size: 15),
+      onTap: () {
+        if (nameRoute == "Logout") {
+          Provider.of<Auth>(listen: false, context).logout();
+          Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+        }
+      },
     );
   }
 }
